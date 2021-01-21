@@ -1,0 +1,74 @@
+<html>
+    <head>
+        <title>Pythagorean</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="A simple website to see the equation of a Pythagorean">
+        <meta name="author" content="chr3st5an">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+        <style>
+            body {
+                background-image:url("images/math.jpg");
+            }
+            #card01 {
+                padding:100px;
+            }
+            #card02 {
+                padding:100px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="card01">
+            <div class="card border-primary">
+                <div class="card-body">
+                    <h5 class="card-title">Pythagorean <span class="badge bg-danger">New</span></h5>
+                    <p class="card-text">Enter an odd number and see the pythagorean equation</p>
+                    <div class="input-group mb-3">
+                        <input id="input" type="text" class="form-control" placeholder="Odd Number">
+                        <button class="btn btn-outline-primary" type="button" id="button-addon1" onclick="showEquation()">Show Equation</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="card02"></div>
+        <script>
+            let cardIsHidden = true;
+
+            function showEquation() {
+                let oddNum = document.getElementById("input").value;
+                if (oddNum === "" || oddNum == 0 || oddNum % 2 == 0 || !/^\d+$/.test(oddNum)) return changeColorOfInputField(false);
+
+                if (cardIsHidden) writeOutputCard();
+
+                changeColorOfInputField(true);
+
+                let num = Math.floor(oddNum * oddNum / 2);
+                let result = num + 1;
+
+                let output = document.getElementById("output");
+                output.innerHTML = `${oddNum}^2 + ${num}^2 = ${result}^2`;
+                return null;
+            }
+
+            function writeOutputCard() {
+                let card = document.getElementById("card02");
+                card.innerHTML = '<div class="card bg-primary text-white"><div id="header" class="card-header">Output</div><div id="output" class="card-body"></div></div>';
+                cardIsHidden = false;
+                return null;
+            }
+
+            function changeColorOfInputField(success) {
+                let field = document.getElementById("input");
+                let value = field.value;
+                if (success) {
+                    field.outerHTML = `<input id="input" type="text" class="form-control alert-success" placeholder="Odd Number">`;
+                } else {
+                    field.outerHTML = `<input id="input" type="text" class="form-control alert-danger" placeholder="Odd Number">`;
+                }
+                document.getElementById("input").value = value;
+                return null;
+            }
+        </script>
+    </body>
+</html>
