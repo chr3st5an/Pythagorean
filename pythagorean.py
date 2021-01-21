@@ -68,5 +68,3 @@ class Pythagorean(object):
 
     def show_equation(self) -> None:
         return print(self)
-
-print(a := Pythagorean(11), f'\n{int(a)}\n{a.triads}')
