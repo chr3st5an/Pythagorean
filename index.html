@@ -13,6 +13,31 @@
             #card01 {
                 padding:100px;
             }
+            #hover-card {
+                display: block;
+                top: 0px;
+                position: relative;
+                text-decoration: none;
+                z-index: 0;
+                overflow: hidden;
+            }
+            #hover-card:hover {
+                transition: all 0.2s ease-out;
+                box-shadow: 0px 4px 8px rgba(38, 38, 38, 0.2);
+                top: -4px;
+                border: 1px solid #cccccc;
+            }
+            #hover-card:before {
+                content: "";
+                position: absolute;
+                border-radius: 32px;
+                transform: scale(2);
+                transform-origin: 50% 50%;
+                transition: transform 0.15s ease-out;
+            }
+            #hover-card:hover:before {
+                transform: scale(2.15);
+            }
             #card02 {
                 padding:100px;
             }
@@ -20,13 +45,19 @@
     </head>
     <body>
         <div id="card01">
-            <div class="card border-primary">
+            <div id="hover-card" class="card border-primary">
                 <div class="card-body">
                     <h5 class="card-title">Pythagorean <span class="badge bg-danger">New</span></h5>
                     <p class="card-text">Enter an odd number and see the pythagorean equation</p>
                     <div class="input-group mb-3">
-                        <input id="input" type="text" class="form-control" placeholder="Odd Number">
-                        <button class="btn btn-outline-primary" type="button" id="button-addon1" onclick="showEquation()">Show Equation</button>
+                        <input id="input" type="text" class="form-control" placeholder="Odd Number" onkeypress="turnButtonOn()">
+                        <button class="btn btn-outline-primary disabled" type="button" id="button-addon1">Show Equation</button>
+                        <script>
+                            function turnButtonOn () {
+                                document.getElementById("button-addon1").outerHTML = '<button class="btn btn-outline-primary" type="button" id="button-addon1" onclick="showEquation()">Show Equation</button>';
+                                return null;
+                            }
+                        </script>
                     </div>
                 </div>
             </div>
